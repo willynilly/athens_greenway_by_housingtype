@@ -102,6 +102,7 @@ analyze_trail_access <- function(file_name,
   return(cht1)
 }
 
+# plot existing and future trails
 future_and_existing <- analyze_trail_access(file_name="existing_and_future_greenway.csv", base_title = "Existing and Future Greenway")
 existing <- analyze_trail_access(file_name="existing_greenway.csv", base_title = "Existing Greenway")
 
@@ -109,19 +110,25 @@ existing <- analyze_trail_access(file_name="existing_greenway.csv", base_title =
 title <- "Housing Unit Count Changes between Future and Existng Plans"
 print(corrplot(future_and_existing$observed - existing$observed, is.cor = FALSE, method="number", tl.col="black", col = cm.colors(100), bg="black", cl.lim = c(-800,800),
                tl.srt=45, addgrid.col="black", cl.pos="b", cl.length = 3, title=title, mar=c(0,0,4.5,0)))
-dev.copy(png,'future_and_existing_changes_counts_by_number.png')
+dev.copy(png,'plots/future_and_existing_changes_counts_by_number.png')
 dev.off()
 
-title <- "" # "Housing Unit Count Changes between Future and Existng Plans"
+title <- "Housing Unit Count Changes between Future and Existng Plans"
 print(corrplot(future_and_existing$observed - existing$observed, is.cor = FALSE, method="circle", tl.col="black", col = cm.colors(100), bg="black", cl.lim = c(-800,800),
                tl.srt=45, addgrid.col="black", cl.pos="b", cl.length = 3, title=title, mar=c(0,0,4.5,0)))
-dev.copy(png,'future_and_existing_changes_counts_by_circle.png')
+dev.copy(png,'plots/future_and_existing_changes_counts_by_circle.png')
 dev.off()
 
-
-norg <- analyze_trail_access(file_name="norg.csv", base_title = "North Oconee River Greenway")
-firefly <- analyze_trail_access(file_name="firefly.csv", base_title = "Firefly Trail")
-pulaski <- analyze_trail_access(file_name="pulaski.csv", base_title = "Pulaski Heights Trail")
-trlcrk <- analyze_trail_access(file_name="trlcrk.csv", base_title = "Trail Creek Greenway", housing_types=c('APT', 'CDO', 'DUP', 'MOB', 'PCL', 'PUB', 'HSE'))
-mext <- analyze_trail_access(file_name="mext.csv", base_title = "Milledge Extension Trail", housing_types =c('APT','CDO', 'DUP', 'PCL', 'HSE'))
-
+# plot other trails
+norg <- analyze_trail_access(file_name="norg.csv", 
+                             base_title = "North Oconee River Greenway")
+firefly <- analyze_trail_access(file_name="firefly.csv", 
+                                base_title = "Firefly Trail")
+pulaski <- analyze_trail_access(file_name="pulaski.csv", 
+                                base_title = "Pulaski Heights Trail")
+trlcrk <- analyze_trail_access(file_name="trlcrk.csv", 
+                               base_title = "Trail Creek Greenway", 
+                               housing_types=c('APT', 'CDO', 'DUP', 'MOB', 'PCL', 'PUB', 'HSE'))
+mext <- analyze_trail_access(file_name="mext.csv", 
+                             base_title = "Milledge Extension Trail", 
+                             housing_types =c('APT','CDO', 'DUP', 'PCL', 'HSE'))
