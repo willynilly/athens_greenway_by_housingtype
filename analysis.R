@@ -106,14 +106,51 @@ analyze_trail_access <- function(file_name,
 future_and_existing <- analyze_trail_access(file_name="existing_and_future_greenway.csv", base_title = "Existing and Future Greenway")
 existing <- analyze_trail_access(file_name="existing_greenway.csv", base_title = "Existing Greenway")
 
-# determine the devations from existing to future plans"
-title <- "Housing Unit Count Changes between Future and Existng Plans"
+# determine the observed existing plans
+title <- "Housing Unit Counts for Existing Plans"
+print(corrplot(existing$observed, 
+               is.cor = FALSE, 
+               method="number", 
+               tl.col="black", 
+               col = cm.colors(100), 
+               bg="black", 
+               cl.lim = c(0,3000),
+               number.cex = .6,
+               tl.srt=45, 
+               addgrid.col="black", 
+               cl.pos="b", cl.length = 3, 
+               title=title, 
+               mar=c(0,0,4.5,0)))
+dev.copy(png,'plots/existing_counts_by_number.png')
+dev.off()
+
+title <- "Housing Unit Counts for Existing Plans"
+print(corrplot(existing$observed, 
+               is.cor = FALSE, 
+               method="circle", 
+               tl.col="black", 
+               col = cm.colors(100), 
+               bg="black", 
+               cl.lim = c(0,3000),
+               number.cex = .6,
+               tl.srt=45, 
+               addgrid.col="black", 
+               cl.pos="b", 
+               cl.length = 3, 
+               title=title, 
+               mar=c(0,0,4.5,0)))
+dev.copy(png,'plots/existing_counts_by_circle.png')
+dev.off()
+
+
+# determine the observed differences between future and existing plans"
+title <- "Housing Unit Count Changes between Future and Existing Plans"
 print(corrplot(future_and_existing$observed - existing$observed, is.cor = FALSE, method="number", tl.col="black", col = cm.colors(100), bg="black", cl.lim = c(-800,800),
                tl.srt=45, addgrid.col="black", cl.pos="b", cl.length = 3, title=title, mar=c(0,0,4.5,0)))
 dev.copy(png,'plots/future_and_existing_changes_counts_by_number.png')
 dev.off()
 
-title <- "Housing Unit Count Changes between Future and Existng Plans"
+title <- "Housing Unit Count Changes between Future and Existing Plans"
 print(corrplot(future_and_existing$observed - existing$observed, is.cor = FALSE, method="circle", tl.col="black", col = cm.colors(100), bg="black", cl.lim = c(-800,800),
                tl.srt=45, addgrid.col="black", cl.pos="b", cl.length = 3, title=title, mar=c(0,0,4.5,0)))
 dev.copy(png,'plots/future_and_existing_changes_counts_by_circle.png')
